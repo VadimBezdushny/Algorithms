@@ -1,0 +1,209 @@
+\documentclass{beamer}
+\usepackage{svg}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs,tabularx}
+\usepackage{makecell}
+\usepackage{minted}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+ 
+\usepackage{minted}
+    \hypersetup{colorlinks=true,linkcolor = blue,
+            allbordercolors={0 0 0},
+            pdfborderstyle={/S/U/W 1}}
+
+\renewcommand{\theFancyVerbLine}{
+  \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\newcommand{\mybluehref}[2]{\hyperref[#1]{\color{green}\setulcolor{red}\ul{#2}}}
+
+\title{Бинарный поиск. Тернарный поиск}
+
+
+\author{Вадим Бездушный}
+
+\date{Подготовка к обласной олимпиаде, 2018}
+
+% Let's get started
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Бинарный поиск: ваш код}
+    \begin{minted}{cpp}
+    int L =             ;
+    int R =             ;
+    while (         ) {
+        int M =            ;
+        if (check(M)) {
+            R =     ;
+        } else {
+            L =     ;
+        }
+    }
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Бинарный поиск: мой код}
+    \begin{minted}{cpp}
+    int L = minValue - 1;
+    int R = maxValue + 1;
+    while (R - L > 1) {
+        int M = (L + R) / 2;
+        if (check(M)) {
+            R = M   ;
+        } else {
+            L = M   ;
+        }
+    }
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Бинарный поиск: код для массива}
+    \begin{minted}{cpp}
+    int L = -1;
+    int R = a.length();
+    while (R - L > 1) {
+        int M = (L + R) / 2;
+        if (a[M] >= key) {
+            R = M   ;
+        } else {
+            L = M   ;
+        }
+    }
+    \end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{Вещественный Бинарный поиск: ваш код}
+    \begin{minted}{cpp}
+    double L = minValue;
+    double R = maxValue;
+    
+        double M = (L + R) / 2;
+        if (check(M)) {
+            R = M   ;
+        } else {
+            L = M   ;
+        }
+    }
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Вещественный Бинарный поиск: мой код}
+    \begin{minted}{cpp}
+    double L = minValue;
+    double R = maxValue;
+    for(int iter = 0; iter < 100; iter++){
+        double M = (L + R) / 2;
+        if (check(M)) {
+            R = M   ;
+        } else {
+            L = M   ;
+        }
+    }
+    \end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{Поиск границ}
+    \begin{minted}{cpp}
+    double leftBorder = -1
+    while(f(leftBorder))
+        leftBorder *=2;
+
+    double rightBorder = 1
+    while(!f(rightBorder))
+        rightBorder *= 2;
+    \end{minted}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Тернарный поиск}
+\begin{minted}{cpp}
+double ternarySearchMin(double left, double right){
+    while(right - left > eps){
+    
+        double midL = (left * 2 + right) / 3;
+        double midR = (left + right * 2) / 3;
+        if f(midL) < f(midR)
+            right = midR;
+        else
+            left = midL;
+    }
+    return (left + right) / 2;
+}    
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Тернарный поиск: мой код}
+\begin{minted}{cpp}
+double ternarySearchMin(double left, double right){
+    for(int iter = 0; iter < 300; iter++){
+        double range = (right - left) / 3;
+        double midL = left  + range;
+        double midR = right - range;
+        if f(midL) < f(midR)
+            right = midR;
+        else
+            left = midL;
+    }
+    return (left + right) / 2;
+}    
+\end{minted}
+\end{frame}
+
+
+\begin{frame}{Задача}
+\url{https://www.e-olymp.com/uk/problems/3968}
+
+Знайдіть таке число $x$, що $x^2 + \sqrt{x} = C$ з точністю не менше 6 знаків після крапки
+\end{frame}
+
+
+\begin{frame}{Приближенный двоичный поиск}
+\url{http://informatics.mccme.ru/mod/statements/view3.php?id=192&chapterid=2}
+\end{frame}
+
+
+\begin{frame}{Дипломы}
+\url{http://informatics.mccme.ru/mod/statements/view3.php?id=1966&chapterid=1923}
+\end{frame}
+
+\begin{frame}{Очень Легкая Задача}
+\url{http://informatics.mccme.ru/mod/statements/view3.php?id=1966&chapterid=490}
+\end{frame}
+
+
+\begin{frame}{Мотузки}
+\url{https://www.e-olymp.com/uk/problems/3967}
+\end{frame}
+
+\begin{frame}{Субботник}
+\url{http://informatics.mccme.ru/mod/statements/view3.php?id=1966&chapterid=1620}
+\end{frame}
+
+
+\begin{frame}{Поляна дров}
+\url{https://www.e-olymp.com/uk/problems/5182}
+\end{frame}
+
+
+
+\end{document}
